@@ -12,4 +12,4 @@ Write a program to solve a Sudoku grid. Your program should accept both an empty
 
 4. I would probably need numpy to use matricies and might use math to perform square roots if needed.
 
-5. The highest priority feature is to be able to generate a puzzle with only one solution and be able to solve the puzzle after it is generated. The medium priority would be to randomly generate the puzzle and possibly tell how many solutions there are. The least priority would be the difficulty generation methods.
+5. The highest priority feature is to be able to generate a puzzle and be able to solve the puzzle after it is generated. The medium priority would be to randomly generate the puzzle and possibly tell how many solutions there are, and then be able to display one with 1 solution. The least priority would be the difficulty generation methods.
