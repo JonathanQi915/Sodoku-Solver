@@ -1,6 +1,5 @@
 import numpy as np;
 class Sudoku:
-  count = 0
   def __init__(self, num):
     if num == 1:
       self.board = [[8,9,0,0,6,2,0,0,0],
@@ -77,18 +76,25 @@ class Sudoku:
   def generate_board(self):
     pass
   
+  count = 0
   def solutions_count(self):
+    self.solutions_count_helper()
+    countCopy = self.count
+    self.count = 0
+    return countCopy
+  
+  def solutions_count_helper(self):
     for y in range(9):
       for x in range(9): # checks every square on the board
        if self.board[y][x] == 0: # terminates on the condition that all squares are non zero
         for n in range(1, 10):
           if self.is_valid_move(x + 1, y + 1, n): # tests every number in the empty square to see if it is valid
             self.board[y][x] = n # sets the valid number to the square
-            self.solutions_count() # recurses and goes to the next unsolved square
+            self.solutions_count_helper() # recurses and goes to the next unsolved square
             self.board[y][x] = 0 # back tracking, if there is no solution it resets the empty square and tries to solve it
                                  # while all the other squares are valid
         return # void method (just mutates the board)
-    self.count = self.count + 1
+    self.count = self.count + 1 # increases the count for every solution
 
   def solve(self):
     for y in range(9):
@@ -101,7 +107,7 @@ class Sudoku:
             self.board[y][x] = 0 # back tracking, if there is no solution it resets the empty square and tries to solve it
                                  # while all the other squares are valid
         return # void method (just mutates the board)
-    print(np.matrix(self.board)) 
+    print(np.matrix(self.board)) # prints every solution
     print()
 
   def start(self):
@@ -110,9 +116,9 @@ class Sudoku:
 MySudoku = Sudoku(3)
 MySudoku.print_board()
 MySudoku.solve()
-MySudoku.solutions_count()
+print(MySudoku.solutions_count())
+print(MySudoku.count)
 MySudoku.board[0][0]
-print(Sudoku.count)
 print(MySudoku.is_board_correct())
 print(MySudoku.is_valid_move(1,1,1))
 print(MySudoku.is_valid_move(2,2,2))
