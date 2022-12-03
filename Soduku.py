@@ -42,9 +42,10 @@ class Sudoku:
                   [0,0,0,0,0,0,0,0,0],
                   [1,0,0,0,0,0,0,0,0]]
 
-  def placer(self, x, y, n):
+  def place(self, x, y, n):
     self.board[y][x] = n
 
+  # easy print method, will improve later
   def print_board(self):
     print(np.matrix(self.board))
 
@@ -89,9 +90,9 @@ class Sudoku:
        if self.board[y][x] == 0: # terminates on the condition that all squares are non zero
         for n in range(1, 10):
           if self.is_valid_move(x + 1, y + 1, n): # tests every number in the empty square to see if it is valid
-            self.placer(x, y, n) # sets the valid number to the square
+            self.place(x, y, n) # sets the valid number to the square
             self.solutions_count_helper() # recurses and goes to the next unsolved square
-            self.placer(x, y, 0) # back tracking, if there is no solution it resets the empty square and tries to solve it
+            self.place(x, y, 0) # back tracking, if there is no solution it resets the empty square and tries to solve it
                                  # while all the other squares are valid
         return # void method (just mutates the board)
     self.count = self.count + 1 # increases the count for every solution
@@ -102,9 +103,9 @@ class Sudoku:
        if self.board[y][x] == 0: # terminates on the condition that all squares are non zero
         for n in range(1, 10):
           if self.is_valid_move(x + 1, y + 1, n): # tests every number in the empty square to see if it is valid
-            self.placer(x, y, n) # sets the valid number to the square
+            self.place(x, y, n) # sets the valid number to the square
             self.solve() # recurses and goes to the next unsolved square
-            self.placer(x, y, 0) # back tracking, if there is no solution it resets the empty square and tries to solve it
+            self.place(x, y, 0) # back tracking, if there is no solution it resets the empty square and tries to solve it
                                  # while all the other squares are valid
         return # void method (just mutates the board)
     print(np.matrix(self.board)) # prints every solution
